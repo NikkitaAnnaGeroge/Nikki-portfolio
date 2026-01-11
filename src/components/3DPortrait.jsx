@@ -1,3 +1,4 @@
+import React, { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Image, Float } from '@react-three/drei';
 
