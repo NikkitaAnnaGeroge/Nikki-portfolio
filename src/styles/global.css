@@ -27,25 +27,37 @@
   /* Hide default cursor for custom implementation */
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Enable page scrolling */
+}
+
 body {
   font-family: var(--font-main);
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  overflow-x: hidden;
-  overflow-y: auto;
-  /* Enable page scrolling */
   -webkit-font-smoothing: antialiased;
 }
 
-#root {
-  width: 100vw;
-  min-height: 100vh;
+.canvas-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ui-layer {
   position: relative;
+  z-index: 10;
 }
 
 canvas {
   pointer-events: none;
-  /* Make 3D canvas non-interactive per user request */
 }
 
 /* Glassmorphism Utilities */
@@ -82,19 +94,6 @@ canvas {
   padding: 100px 24px;
   position: relative;
   z-index: 10;
-}
-
-/* Canvas Container */
-#canvas-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: margin-box;
-  /* Allow events to pass through if needed, but R3F usually needs events */
-  /* We'll handle R3F pointer events separately */
 }
 
 /* Selection */
