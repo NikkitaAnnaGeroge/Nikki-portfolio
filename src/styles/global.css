@@ -5,15 +5,15 @@
   --glass-border: rgba(255, 255, 255, 0.08);
   --text-primary: #ffffff;
   --text-secondary: #a0a0a0;
-  
+
   /* Accents - Soft Neon Glow */
   --accent-purple: #bb86fc;
   --accent-blue: #00f2ea;
   --accent-glow: 0 0 20px rgba(187, 134, 252, 0.3);
-  
+
   /* Typography */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
+
   /* 3D Depth */
   --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -23,7 +23,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none; /* Hide default cursor for custom implementation */
+  cursor: none;
+  /* Hide default cursor for custom implementation */
 }
 
 body {
@@ -31,6 +32,8 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   overflow-x: hidden;
+  overflow-y: auto;
+  /* Enable page scrolling */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,6 +41,11 @@ body {
   width: 100vw;
   min-height: 100vh;
   position: relative;
+}
+
+canvas {
+  pointer-events: none;
+  /* Make 3D canvas non-interactive per user request */
 }
 
 /* Glassmorphism Utilities */
@@ -84,7 +92,8 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  pointer-events: margin-box; /* Allow events to pass through if needed, but R3F usually needs events */
+  pointer-events: margin-box;
+  /* Allow events to pass through if needed, but R3F usually needs events */
   /* We'll handle R3F pointer events separately */
 }
 
@@ -98,13 +107,16 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #000;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ScrollControls, Scroll } from '@react-three/drei';
 import Scene from './components/Scene';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -16,8 +15,8 @@ function App() {
     <>
       <CustomCursor />
 
-      {/* 3D Background & Scrollable Scene */}
-      <div id="canvas-container">
+      {/* 3D Background - Fixed & Non-Blocking */}
+      <div id="canvas-container" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
           <Suspense fallback={null}>
             <color attach="background" args={['#0a0a0a']} />
@@ -27,30 +26,20 @@ function App() {
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
             <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
-            <ScrollControls pages={5} damping={0.2}>
-              {/* 3D Content that scrolls/moves */}
-              <Scene />
-
-              {/* HTML Content Overlay */}
-              <Scroll html style={{ width: '100vw' }}>
-                <main className="w-full">
-                  <Hero />
-                  <About />
-                  <Skills />
-                  <Projects />
-                  <Contact />
-                  <Footer />
-                </main>
-              </Scroll>
-            </ScrollControls>
+            <Scene />
           </Suspense>
         </Canvas>
       </div>
 
-      {/* Fallback / Overlay UI if needed (e.g. fixed nav) */}
-      <nav style={{ position: 'fixed', top: 0, right: 0, padding: '2rem', zIndex: 50 }}>
-        {/* Simple Nav can go here */}
-      </nav>
+      {/* HTML Content Scrolled Normally - On Top */}
+      <main className="w-full" style={{ position: 'relative', zIndex: 10 }}>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+      </main>
     </>
   );
 }
