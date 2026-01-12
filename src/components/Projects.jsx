@@ -35,14 +35,17 @@ const ProjectCard = ({ project, index }) => {
     // Odd index (1): Comes from Left (-100px -> 0)
     const xRange = index % 2 === 0 ? [100, 0] : [-100, 0];
     const x = useTransform(scrollYProgress, [0, 1], xRange);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
     const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
 
     return (
         <motion.div
             ref={cardRef}
             className="project-card"
-            style={{ x, opacity, scale }}
+            style={{ x, scale }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-10%" }}
         >
             <div className="project-glow" />
             <div className="project-header">
