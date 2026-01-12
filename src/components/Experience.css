@@ -1,0 +1,101 @@
+.experience-section {
+    padding: 100px 10%;
+    position: relative;
+    z-index: 2;
+}
+
+.experience-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 60px;
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.experience-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.experience-card {
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: var(--primary-purple);
+    filter: blur(60px);
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+}
+
+.experience-card:hover .card-glow {
+    opacity: 0.4;
+}
+
+.exp-date {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-family: monospace;
+}
+
+.exp-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.exp-desc {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.exp-link {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.exp-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateX(5px);
+    box-shadow: 0 0 15px rgba(0, 242, 234, 0.2);
+}
+
+@media (max-width: 768px) {
+    .experience-section {
+        padding: 60px 5%;
+    }
+    
+    .experience-title {
+        font-size: 2rem;
+    }
+}
