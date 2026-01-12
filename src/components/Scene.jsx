@@ -63,9 +63,10 @@ const Scene = () => {
 
             {/* Hero Section Portrait - Positioned to the right */}
             {/* Adjust coordinates to match Hero layout. x=3 pushes it to the right column on desktop */}
-            <group position={[3, 0, 0]}>
+            {/* Hero Section Portrait Removed as per new requirements */}
+            {/* <group position={[3, 0, 0]}>
                 <Portrait3D />
-            </group>
+            </group> */}
 
             {/* Floating geometric shapes for depth */}
             <FloatingShape position={[-5, 2, -10]} color="#00f2ea" scale={1.5} />

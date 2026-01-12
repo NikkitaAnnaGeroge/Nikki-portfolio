@@ -31,7 +31,7 @@ const Projects = () => {
     });
 
     return (
-        <section className="projects-section" ref={ref}>
+        <section id="projects" className="projects-section" ref={ref}>
             <motion.h2
                 className="projects-title"
                 initial={{ opacity: 0 }}
@@ -45,10 +45,12 @@ const Projects = () => {
                     <motion.div
                         key={index}
                         className="project-card"
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                        // First project (index 0) -> From Right (x: 100)
+                        // Second project (index 1) -> From Left (x: -100)
+                        initial={{ opacity: 0, x: index % 2 === 0 ? 100 : -100 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6, delay: index * 0.2 }}
-                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+                        whileHover={{ scale: 1.02, y: -5 }}
                     >
                         <div className="project-glow" />
 

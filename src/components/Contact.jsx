@@ -10,7 +10,7 @@ const Contact = () => {
     });
 
     return (
-        <section className="contact-section" ref={ref}>
+        <section id="contact" className="contact-section" ref={ref}>
             <motion.div
                 className="contact-container"
                 initial={{ opacity: 0, scale: 0.9 }}

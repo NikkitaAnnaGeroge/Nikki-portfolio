@@ -10,17 +10,27 @@ const About = () => {
     });
 
     return (
-        <section className="section-container about-section" ref={ref}>
+        <section id="about" className="section-container about-section" ref={ref}>
             <motion.div
                 className="glass-panel about-card"
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8 }}
             >
-                <div className="about-image-container">
-                    <img src="/assets/Nikkita.jpeg" alt="Nikkita Anna George" className="about-image" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                </div>
+                <motion.div
+                    className="about-image-wrapper"
+                    initial={{ opacity: 0, y: 100, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    viewPort={{ once: true }}
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                >
+                    <div className="about-image-container premium-frame">
+                        <img src="/assets/Nikkita.jpeg" alt="Nikkita Anna George" className="about-image" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                        <div className="premium-glow" />
+                    </div>
+                </motion.div>
 
                 <div className="about-content">
                     <h2 className="text-gradient">About Me</h2>
@@ -52,6 +62,8 @@ const About = () => {
                 </div>
             </motion.div>
         </section>
+    );
+        </section >
     );
 };
 

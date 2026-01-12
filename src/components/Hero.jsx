@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './Hero.css';
 
 const Hero = () => {
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            setMousePos({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
     return (
         <section className="section-container hero-section">
             <div className="hero-content">
@@ -50,13 +59,28 @@ const Hero = () => {
                     className="hero-buttons"
                 >
                     {/* Button style needs to be consistent. Using class names from Hero.css */}
-                    <button className="btn-primary">
+                    <button
+                        className="btn-primary"
+                        onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
+                    >
                         View Work
                     </button>
-                    <button className="btn-secondary">
+                    <button
+                        className="btn-secondary"
+                        onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+                    >
                         Contact Me
                     </button>
                 </motion.div>
+
+                {/* Subtle Cursor Spotlight for Home Section */}
+                <div
+                    className="hero-spotlight"
+                    style={{
+                        left: `${mousePos.x}px`,
+                        top: `${mousePos.y}px`
+                    }}
+                />
             </div>
 
             {/* 3D Portrait is handled by the Scene component */}
