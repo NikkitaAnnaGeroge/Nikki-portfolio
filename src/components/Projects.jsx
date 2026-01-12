@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import './Projects.css';
 
 const projects = [
@@ -24,28 +25,17 @@ const projects = [
 ];
 
 const ProjectCard = ({ project, index }) => {
-    const cardRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ["start end", "end center"]
-    });
-
-    // Scroll-driven motion: content moves as you scroll
-    // Even index (0, 2): Comes from Right (100px -> 0)
-    // Odd index (1): Comes from Left (-100px -> 0)
-    const xRange = index % 2 === 0 ? [100, 0] : [-100, 0];
-    const x = useTransform(scrollYProgress, [0, 1], xRange);
-    const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
-
     return (
         <motion.div
-            ref={cardRef}
             className="project-card"
-            style={{ x, scale }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-10%" }}
+            // Scroll-driven motion replace with proven reliable animation matching Experience section
+            // Even index (0, 2): Comes from Right (50px)
+            // Odd index (1): Comes from Left (-50px)
+            initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+            whileHover={{ scale: 1.02, y: -5 }}
         >
             <div className="project-glow" />
             <div className="project-header">
