@@ -20,19 +20,21 @@ export default function App() {
   }, []);
 
   return (
-    <ErrorBoundary>
+    <>
       <CustomCursor />
 
-      {/* 3D Background - Only mount after DOM is ready to prevent hydration/context mismatches on Node 24 */}
-      {mounted && (
-        <div className="canvas-container">
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 2]}>
-            <Suspense fallback={null}>
-              <Scene />
-            </Suspense>
-          </Canvas>
-        </div>
-      )}
+      {/* 3D Background - Isolated ErrorBoundary ensures UI survives if 3D crashes */}
+      <div className="canvas-container">
+        <ErrorBoundary>
+          {mounted && (
+            <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 2]}>
+              <Suspense fallback={null}>
+                <Scene />
+              </Suspense>
+            </Canvas>
+          )}
+        </ErrorBoundary>
+      </div>
 
       {/* Loading Indicator */}
       <div className="loader-container">
@@ -40,15 +42,17 @@ export default function App() {
         </Suspense>
       </div>
 
-      {/* HTML UI */}
+      {/* HTML UI - Wrapped in its own ErrorBoundary so we know if UI specifically crashes */}
       <div className="ui-layer">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-        <Footer />
+        <ErrorBoundary>
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+          <Footer />
+        </ErrorBoundary>
       </div>
-    </ErrorBoundary>
+    </>
   );
 }
