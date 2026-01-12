@@ -1,6 +1,54 @@
-import React from 'react';
-import './styles/global.css';
+import React, { Suspense, useState, useEffect } from "react";
+import { Canvas } from "@react-three/fiber";
+import Scene from "./components/Scene";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import CustomCursor from "./components/CustomCursor";
+import ErrorBoundary from "./components/ErrorBoundary";
+import Loader from "./components/Loader";
+import "./styles/global.css";
 
 export default function App() {
-  return <div style={{ color: "white", padding: "40px", fontSize: "24px" }}>App Loaded Successfully</div>;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      <CustomCursor />
+
+      {/* 3D Background - Only mount after DOM is ready to prevent hydration/context mismatches on Node 24 */}
+      {mounted && (
+        <div className="canvas-container">
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 2]}>
+            <Suspense fallback={null}>
+              <Scene />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
+
+      {/* Loading Indicator */}
+      <div className="loader-container">
+        <Suspense fallback={<Loader />}>
+        </Suspense>
+      </div>
+
+      {/* HTML UI */}
+      <div className="ui-layer">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
+    </ErrorBoundary>
+  );
 }

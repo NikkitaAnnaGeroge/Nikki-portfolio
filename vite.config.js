@@ -3,5 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "/",   // <<< ADD THIS
+  base: "/",
+  optimizeDeps: {
+    exclude: ["three", "@react-three/fiber", "@react-three/drei"]
+  },
+  build: {
+    target: "esnext"
+  }
 })
