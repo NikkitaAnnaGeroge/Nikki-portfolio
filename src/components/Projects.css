@@ -63,6 +63,11 @@
     font-weight: 600;
 }
 
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .project-links a {
     color: white;
     text-decoration: none;
@@ -110,4 +115,4 @@
     .project-desc {
         max-width: 100%;
     }
-}   
+}

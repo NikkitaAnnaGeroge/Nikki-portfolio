@@ -21,6 +21,13 @@ const projects = [
         type: "Mental Health App",
         desc: "A personal companion for emotional well-being combining mood tracking and reflection.",
         github: "https://github.com/NikkitaAnnaGeroge/SoulTracker_demo"
+    },
+    {
+        title: "To-Do List",
+        type: "Web Application",
+        desc: "An interactive, responsive task management application built for μLearn, supporting dynamic task creation, completion toggles, and deletion.",
+        github: "https://github.com/NikkitaAnnaGeroge/To-Do-List",
+        live: "https://nikkitaannageroge.github.io/To-Do-List/"
     }
 ];
 
@@ -44,9 +51,16 @@ const ProjectCard = ({ project, index }) => {
                     <h3 className="project-name">{project.title}</h3>
                 </div>
                 <div className="project-links">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        GitHub ↗
-                    </a>
+                    {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer">
+                            GitHub ↗
+                        </a>
+                    )}
+                    {project.live && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer">
+                            Live Demo ↗
+                        </a>
+                    )}
                 </div>
             </div>
             <p className="project-desc">{project.desc}</p>
